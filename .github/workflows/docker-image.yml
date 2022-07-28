@@ -44,6 +44,6 @@ jobs:
         name: Build and push Nginx
         uses: docker/build-push-action@v3
         with:
-          context: ./server/
+          context: ./nginx/
           push: true
           tags: filmclubwts2020/nginx:latest
