@@ -1,0 +1,82 @@
+version: '3.7'
+
+services:
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    image: node-app
+    container_name: node-app-server
+    command: node index.js
+    volumes:
+      - ./server/:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+    env_file: ./server/.env
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+    links:
+      - mongodb
+  mongodb:
+    image: mongo:latest
+    container_name: mongo-db
+    volumes:
+      - data-volume:/data/db
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    image: vue-app
+    container_name: vue-app-client
+    command: npm run serve
+    volumes:
+      - ./client/:/usr/app
+      - /usr/app/node_modules
+    depends_on:
+      - server
+    ports:
+      - "9090:9090"
+    networks:
+      - app-network
+  mongo-express:
+    image: mongo-express
+    container_name: mongo-express
+    ports:
+            - "8081:8081"
+    networks:
+      - app-network
+    environment: 
+        ME_CONFIG_MONGODB_SERVER: mongodb  
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: nginx-webserver
+    container_name: nginx
+    restart: always
+    depends_on:
+      - server
+      - client
+    ports:
+      - 80:80
+    networks:
+      - app-network
+
+  
+networks:
+    app-network:
+        driver: bridge
+volumes:
+    data-volume:
+    node_modules:
+    web-root:
+      driver: local
