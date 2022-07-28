@@ -16,16 +16,6 @@ jobs:
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-    - name: Build Server
-    run: docker build ./server filmclubwts2020/server:latest
-    - name: Build Client
-    run: docker build ./client filmclubwts2020/front:latest
-    - name: Build Nginx
-    run: docker build ./nginx  filmclubwts2020/nginx:latest
-    -name: Docker Push
-    run:
-    docker push filmclubwts2020/server:latest
-    docker push filmclubwts2020/front:latest
-    docker push filmclubwts2020/nginx:latest
+    
     
     
