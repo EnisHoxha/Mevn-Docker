@@ -29,7 +29,7 @@
       <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
     </ul>
 
-    <h1>Ndryshimet e bera ne kod dhe testimi</h1>
+    <h1>Testing 1 </h1>
   </div>
 </template>
 
