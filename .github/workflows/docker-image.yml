@@ -29,21 +29,7 @@ jobs:
           context: ./server
           push: true
           tags: filmclubwts2020/server:latest
-      -
-       name: Build and push client
-        uses: docker/build-push-action@v3
-        with:
-          context: ./client
-          push: true
-          tags: filmclubwts2020/client:latest
-          
-      -
-       name: Build and push nginx
-          uses: docker/build-push-action@v3
-          with:
-            context: ./nginx
-            push: true
-            tags: filmclubwts2020/nginx:latest
+      
       
         
     
