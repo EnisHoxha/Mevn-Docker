@@ -1,4 +1,4 @@
-name: ci-
+name: ci
 
 on:
   push:
@@ -47,3 +47,11 @@ jobs:
           context: ./server/
           push: true
           tags: filmclubwts2020/nginx:latest
+          
+       -
+        name: Build and push MongoDB
+        uses: docker/build-push-action@v3
+        with:
+          context: ./mongo/
+          push: true
+          tags: filmclubwts2020/mongo:latest
